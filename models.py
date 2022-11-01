@@ -8,32 +8,51 @@ class student(models.Model):#heritage
     familyName=models.CharField(max_length=70,null=False,blank=False)
     birthDate=models.DateFeld(default=date(2004,1,1),null=False,blank=False)
     email=models.EmailField(maxlength=100)
-    photo=models.ImageField(upload_to='photos/students')
+    photo=models.ImageField(upload_to='photos/students',null=False,blank=False)
+    stateC=[(present, absent, delayed,excluded)]
+    state=models.CharField(choices=stateC,null=False,blank=False)
+    situationC=[(new,repeating,derogatory,other)]
+    situation=models.CharField(choices=situationC,null=False,blank=False)
+    
+
+class absence(models.Model):
+    Date=models.DateField(default=date(2004,1,1),null=False,blank=False)
+    motif=models.CharField()
+    justification=models.DateFeld()
+
+
+class session(models.Model):
+    startime=models.TimeField(null=False,blank=False)
+    endtime=models.TimeField(null=False,blank=False)
+    classroomnumber=models.IntigerField()   
+    goal=models.CharField(null=False,blank=False)
+    summary=models.CharField(null=False,blank=False)
+    tools=models.CharField()
+
+
+class module(models.Model):
+    Name=models.CharField(null=False,blank=False,unique=True)
+    Nhours=models.IntegerFieldr(null=False,blank=False,unique=True)
+    type=models.CharField()
+    studylevel=[('1st','first class'),('2nd','second class'),('3rd','third class')]
+    level=models.CharField(choices=studylevel)
+
+
 class professor(models.Model):
     name=models.CharField(max_length=70,null=False,blank=False)
     familyName=models.CharField(max_length=70,null=False,blank=False)
     birthDate=models.DateFeld(default=date(2004,1,1),null=False,blank=False)
-    email=models.EmailField(maxlength=100)
-    photo=models.ImageField(upload_to='photos/students')
+    personalemail=models.EmailField(maxlength=100)
+    workemail=models.EmailField(maxlength=100)
+    totalhoursofwork=models.IntegerField()
+    photo=models.ImageField(upload_to='photos/prof')
 
 class group(models.Model):
     name=models.CharField(max_length=70,null=False,blank=False) 
     nbstudent=models.IntigerField(null=False,blank=False)  
     email=models.EmailField(maxlength=100)
-    speciality=models.CharField(max_length=70,null=False,blank=False)
-    studylevel=[('1st','first class','2nd','second class','3rd','third class')]
+    studylevel=[('1st','first class'),('2nd','second class'),('3rd','third class')]
     level=models.CharField(choices=studentlevel)
-
-class adress(models.Model):
-    number=models.IntigerField(null=False,blank=False)   
-
-class module(models.Model):
-     modulename=[('Math','physique','francais','anglais','informatique','securite')]
-     name=models.CharField(choices=modulename,max_length=70,null=False,blank=False)
-
-class universite(models.Model):
-    uniname=[('isg','ihec','fst','fseg','enit')]
-    name=models.CharField(choices)uniname,max_length=70,null=False,blank=False) 
 
 
 
